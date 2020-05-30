@@ -2,13 +2,13 @@
 <div>
   <div class="list">
     <MovieListItem
-      v-for="movie in movies"
-      :key="movie.imdbID"
+      v-for="(movie,idx) in movies"
+      :key="movie.imdbID+idx"
       :movie="movie"
       />
   </div>
 
-  <button class="btn">Load more</button>
+  <button class="btn" @click="loadMore">Load more</button>
 
   </div>
 </template>
@@ -25,6 +25,7 @@ export default Vue.extend({
   data() {
     return {
       movies: [] as Movie[],
+      currentPage: 1,
     };
   },
   async created() {
@@ -35,7 +36,12 @@ export default Vue.extend({
       const result = await MovieService.movieService.getMovieList(this.user.apiToken);
       this.movies = result.result;
     },
-
+    async loadMore() {
+      const { apiToken } = this.user;
+      const result = await MovieService.movieService.getMovieList(apiToken, this.currentPage + 1);
+      this.movies = [...this.movies, ...result.result];
+      this.currentPage += 1;
+    },
   },
   components: {
     MovieListItem,

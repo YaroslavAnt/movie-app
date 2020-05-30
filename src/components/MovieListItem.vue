@@ -34,7 +34,6 @@ export default Vue.extend({
   border-radius: 12px 4px 12px 4px;
   overflow: hidden;
   transition: 0.3s;
-  /* max-width: 200px; */
 
   &:hover {
     box-shadow: 3px 4px 10px 0 rgba(0, 0, 0, 0.3);
