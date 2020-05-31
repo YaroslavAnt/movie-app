@@ -1,15 +1,10 @@
 <template>
-<div>
-  <div class="list">
-    <MovieListItem
-      v-for="(movie,idx) in movies"
-      :key="movie.imdbID+idx"
-      :movie="movie"
-      />
-  </div>
+  <div>
+    <div class="list">
+      <MovieListItem v-for="(movie, idx) in movies" :key="movie.imdbID + idx" :movie="movie" />
+    </div>
 
-  <button class="btn" @click="loadMore">Load more</button>
-
+    <Button :handleClick="loadMore" :text="'Load more'"></Button>
   </div>
 </template>
 
@@ -18,6 +13,7 @@ import Vue from 'vue';
 import { mapState } from 'vuex';
 import MovieService from '@/services/MovieService';
 import MovieListItem from './MovieListItem.vue';
+import Button from './Button.vue';
 import { Movie } from '../services/types';
 
 export default Vue.extend({
@@ -45,6 +41,7 @@ export default Vue.extend({
   },
   components: {
     MovieListItem,
+    Button,
   },
   computed: {
     ...mapState({
@@ -56,8 +53,7 @@ export default Vue.extend({
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-
-.list{
+.list {
   display: grid;
   grid-gap: 20px;
   justify-content: center;
@@ -69,7 +65,7 @@ export default Vue.extend({
   }
 }
 
-.btn{
+.btn {
   border: none;
   outline: none;
   background-color: #777;
@@ -81,7 +77,7 @@ export default Vue.extend({
   margin: 30px auto;
   box-shadow: 2px 2px 2px 0 rgba(0, 0, 0, 0.12);
 
-  &:hover{
+  &:hover {
     background-color: #555;
   }
 }
