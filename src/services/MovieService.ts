@@ -10,11 +10,12 @@ class MovieService {
     });
   }
 
-  public async getMovieList(token: string, page = 1) {
+  public async getMovieList(token: string, page = 1, type = '') {
     const result = await this.axiosInstance.get('/', {
       params: {
         s: 'Batman',
         page,
+        type,
         apikey: token,
       },
     });
